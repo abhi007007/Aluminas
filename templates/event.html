@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Template Mo">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+  <title>Event</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/lightbox.css">
+  <link href="/style.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
+  <link href="assets/css/loginStyle.css" rel="stylesheet" type="text/css">
+  <!--
+
+TemplateMo 569 Edu Meeting
+
+https://templatemo.com/tm-569-edu-meeting
+
+-->
+  <script type="text/javascript">
+    async function getEvent() {
+      var didd = sessionStorage.getItem("depa");
+      var unm = sessionStorage.getItem("name");
+      var eventnm = document.getElementById("event");
+      var evtprt = document.getElementById("evtprt")
+
+      var evet = {}
+      evet = await $.get("/event", { "did": didd, "user": unm }, function (data, status, xhr) {
+        return data;
+      }, "json");
+      // alert(JSON.stringify(evet));
+      var evt = []
+      evt = evet.output;
+      for (var key in evt) {
+        var prt= " </P><input type=\"submit\" value=\"APPLY\"> </div> </div>";
+        evtprt.innerHTML += "<div class=\"item\"> <div class=\"icon\"><img src=\"assets/images/service-icon-01.png\" alt=\"\"></div><div class=\"down-content\"><h4 >" + evt[key]["eventname"] + "</h4>  <p >" + evt[key]["eventdate"] +"</p><P >"+ evt[key]["eventvenue"] +"</P><P >" + evt[key]["eventtime"] + prt;
+        // for (var key1 in evt[key]) {
+        //   var txt = document.createElement("input");
+        //   txt.type = "text";
+        //   txt.id = key1;
+        //   txt.value = evt[key][key1];
+        //   eventnm.appendChild(txt);
+
+        // }
+        // var br = document.createElement("BR");
+        // eventnm.appendChild(br);
+
+        // var btn = document.createElement("button");
+
+        // btn.classList.add("fa", "fa-pen", "fa-6");
+
+        // // btn.innerHTML = "EDIT";
+        // eventnm.appendChild(btn);
+        // var btn = document.createElement("button");
+        // btn.classList.add("fa", "fa-circle-xmark", "fa-6");
+        // // btn.innerHTML = "DELETE";
+        // eventnm.appendChild(btn);
+        // var btn = document.createElement("button");
+
+        // btn.classList.add("fa", "fa-handshake", "fa-6");
+
+        // // btn.classList.add("fa", "fa-handshake", "fa-6");
+        // eventnm.appendChild(btn)
+        // var br = document.createElement("BR");
+        // eventnm.appendChild(br);
+
+        //  var name;
+        //   var btn = document.createElement("button");
+        //   btn.innerHTML = "participate";
+        //   if(name === 'ADMIN'){
+        //   btn.disabled = true;
+        //   }
+        //   else{
+        //     btn.disabled = false;
+        //   }
+        //   eventnm.appendChild(btn);
+
+      }
+    }
+  </script>
+</head>
+
+<body onload="getEvent()">
+  <!-- Sub Header!-->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+
+
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li><a href="index.html" onclick="logoutAction()">LOGOUT</a></li>
+            </ul>
+
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+
+
+  <section class="meetings-page" id="meetings">
+    <div class="container">
+      <ul class="nav">
+        <div class="sidenav">
+          <ul>
+            <li><a href="home.html"><i class="fa-solid fa-house-user"></i> Home</a></li>
+            <li><a href="profile.html" class="active"><i class="fa-solid fa-user"></i> PROFILE</a></li>
+            <li><a href="event.html"><i class="fa-solid fa-calendar"></i>EVENTS</a></li>
+            <li><a href="job.html"><i class="fa-solid fa-user-tie"></i>JOBS</a></li>
+          </ul>
+        </div>
+      </ul>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-9">
+              <!-- <form id="event">
+              </form> -->
+              <section class="services">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8">
+                      <div id="evtprt" class="owl-service-item owl-carousel">
+                      </div>
+                      </div>
+                  </div>
+                </div>
+                </section>
+              <div class="filters">
+              </div>
+              <br><br><br><br><br><br><br><br><br><br>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="footer">
+              <!-- <p>last login date and time</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </section>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/lightbox.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/isotope.js"></script>
+  <script src="assets/js/video.js"></script>
+  <script src="assets/js/slick-slider.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+
+
+  <script>
+    //according to loftblog tut
+    $('.nav li:first').addClass('active');
+
+    var showSection = function showSection(section, isAnimate) {
+      var
+        direction = section.replace(/#/, ''),
+        reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+        reqSectionPos = reqSection.offset().top - 0;
+
+      if (isAnimate) {
+        $('body, html').animate({
+          scrollTop: reqSectionPos
+        },
+          800);
+      } else {
+        $('body, html').scrollTop(reqSectionPos);
+      }
+
+    };
+
+    var checkSection = function checkSection() {
+      $('.section').each(function () {
+        var
+          $this = $(this),
+          topEdge = $this.offset().top - 80,
+          bottomEdge = topEdge + $this.height(),
+          wScroll = $(window).scrollTop();
+        if (topEdge < wScroll && bottomEdge > wScroll) {
+          var
+            currentId = $this.data('section'),
+            reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+          reqLink.closest('li').addClass('active').
+            siblings().removeClass('active');
+        }
+      });
+    };
+
+    $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+      e.preventDefault();
+      showSection($(this).attr('href'), true);
+    });
+
+    $(window).scroll(function () {
+      checkSection();
+    });
+  </script>
+</body>
+
+</html>
