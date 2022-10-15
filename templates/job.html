@@ -8,13 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="Template Mo">
-  <!-- <meta http-equiv="cache-control" content="max-age=0" />
-  <meta http-equiv="cache-control" content="no-cache" />
-  <meta http-equiv="expires" content="0" />
-  <meta http-equiv="pragma" content="no-cache"> -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-  <title>LOGIN PAGE</title>
+  <title>jobs</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{%static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
@@ -25,10 +21,9 @@
   <link rel="stylesheet" href="{%static 'css/templatemo-edu-meeting.css'%}">
   <link rel="stylesheet" href="{%static 'css/owl.css'%}">
   <link rel="stylesheet" href="{%static 'css/lightbox.css'%}">
+  <!-- <link href="/style.css" rel="stylesheet" type="text/css"> -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
   <link href="{%static 'css/loginStyle.css'%}" rel="stylesheet" type="text/css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <!--
 
 TemplateMo 569 Edu Meeting
@@ -37,27 +32,36 @@ https://templatemo.com/tm-569-edu-meeting
 
 -->
   <script type="text/javascript">
-    async function loginAction(val) {
-      var usr = document.getElementById("username").value;
-      var pass = document.getElementById("password").value;
-      // alert(usr + "::" + pass);
-      if(usr==''||pass==''){
-        window.alert("please fill username and password")
-        return false
-      }else{
-        return true
+    async function getJob() {
+
+      var didt = sessionStorage.getItem("depa");
+      var un = sessionStorage.getItem("name");
+      var jbpost = document.getElementById("jbpost");
+      var prnt = document.getElementById("prnt");
+
+      var job = {}
+
+      job = await $.get("/job/select", { "did": didt, "user": un }, function (data, status, xhr) {
+        return data;
+      }, "json");
+      alert(JSON.stringify(job));
+      var jb = []
+      var jb = job.output;
+      for (var key in jb) {
+        var end = " </P><input type=\"submit\" value=\"APPLY\"> </div> </div>";
+        prnt.innerHTML += "<div class=\"item\"> <div class=\"icon\"><img src=\"assets/images/service-icon-01.png\" alt=\"\"></div><div class=\"down-content\"><h4 >" + jb[key]["jobpost"] + "</h4>  <p >VENUE : COLLEGE AUDITORIUM</p><P >DATE : 22-07-2022 TIME : 11:00 AM</P><P >" + jb[key]["jobdescription"] + end;
+
+
       }
 
     }
+
+    //window.onload = getJob();
   </script>
 </head>
 
-<body>
-
-
-
-  <!-- Sub Header -->
-
+<body >
+  <!-- Sub Header!-->
 
   <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky">
@@ -66,17 +70,14 @@ https://templatemo.com/tm-569-edu-meeting
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="{% url 'index' %}" class="logo">
-              ALUMNAS
-            </a>
+
+
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-
-
-              <li><a href="{% url 'index' %}">Home</a></li>
-              <li><a href="{% url 'register'%}">REGISTER</a></li>
+              <li><a href="" >LOGOUT</a></li>
             </ul>
+
             <!-- ***** Menu End ***** -->
           </nav>
         </div>
@@ -89,47 +90,84 @@ https://templatemo.com/tm-569-edu-meeting
 
   <section class="meetings-page" id="meetings">
     <div class="container">
+      <ul class="nav">
+        <div class="sidenav">
+          <ul>
+            <li><a href="{%url 'home'%}"><i class="fa-solid fa-house-user"></i> Home</a></li>
+            <li><a href="{%url 'profile'%}" class="active"><i class="fa-solid fa-user"></i> PROFILE</a></li>
+            <li><a href="{%url 'event'%}"><i class="fa-solid fa-calendar"></i>EVENTS</a></li>
+            <li><a href="{%url 'job'%}"><i class="fa-solid fa-user-tie"></i>JOBS</a></li>
+          </ul>
+        </div>
+      </ul>
       <div class="row">
         <div class="col-lg-12">
           <div class="row">
-            <div class="col-lg-12">
-              <div class="login">
-                <h1>Login</h1>
-                <form onsubmit="return loginAction()" method="post">
-                  {% csrf_token %}
-                  <label for="username">
-                    <!-- font awesome icon -->
-                    <i class="fas fa-user"></i>
-                  </label>
-                  <input type="text" name="username" placeholder="Username" id="username" required>
-                  <label for="password">
-                    <i class="fas fa-lock"></i>
-                  </label>
-                  <input type="password" name="password" placeholder="Password" id="password" required>
-                  <span class="psw">Forgot <a href="#">password?</a></span>
-                  <div class="btn-group">
-                    <input type="button" value="cancel">
-                    &nbsp;
-                    <input type="submit" value="login">
-                  </div>
-                  <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
+            <div class="col-lg-2"></div>
+            
+            <div class="col-lg-8">
+              <br><br><br><br>
+              <section class="services">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8">
+                      <div id="prnt" class="owl-service-item owl-carousel">
 
-                </form>
-              </div>
+                        <div id="cln" class="item">
+                          <div class="icon">
+                            <img src="{%static 'images/service-icon-01.png'%}" alt="">
+                          </div>
+                          <div class="down-content">
+                            <h4 id="hed">YOUTH FESTIVAL</h4>
+                            <p id="ven">VENUE : COLLEGE AUDITORIUM</p>
+                            <P id="dat">DATE : 22-07-2022 TIME : 11:00 AM</P>
+                            <P id="sec">ALL STUDENTS CAN PARTICIPATE </P>
+                            <input type="submit" value="PARTICIPATE">
+                          </div>
+                        </div>
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+
+
+
+              <!-- <div class="col-lg-12">
+                  <div class="owl-service-item owl-carousel" style=" background-color: #a12c2f;
+                  color: #fff;">>
+        
+                    <div class="item">
+                      <div class="icon">
+                        <img src="assets/images/service-icon-01.png" alt="">
+                      </div>
+                      <div class="down-content" size ="20px">
+                        <h6>YOUTH FESTIVAL</h6>
+                        <p>VENUE : COLLEGE AUDITORIUM</p>
+                        <P>DATE : 22-07-2022 TIME : 11:00 AM</P>
+                        <P>ALL STUDENTS CAN PARTICIPATE </P>
+                        
+                      </div>
+                    </div> -->
+
+
 
               <div class="filters">
-
               </div>
+              <br><br><br><br><br><br><br><br><br><br>
             </div>
-
             <div class="footer">
-              <!-- <p>Copyright © 2022 SNGIST,All Rights Reserved.
-                <br>Design: <a href="https://templatemo.com/page/1" target="_parent"
-                  title="website templates">TemplateMo</a>
-              </p> -->
+              <!-- <p>last login date and time</p> -->
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
-
 
 
   <!-- Scripts -->
@@ -146,6 +184,8 @@ https://templatemo.com/tm-569-edu-meeting
   <script src="{%static 'js/slick-slider.js'%}"></script>
   <script type="text/javascript" src="{%static 'js/custom.js'%}"></script>
   <script src="{%static 'js/main.js'%}"></script>
+
+
   <script>
     //according to loftblog tut
     $('.nav li:first').addClass('active');
@@ -193,9 +233,6 @@ https://templatemo.com/tm-569-edu-meeting
       checkSection();
     });
   </script>
-</body>
-
-
 </body>
 
 </html>

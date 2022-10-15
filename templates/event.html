@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,88 +13,24 @@
   <title>Event</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{%static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
 
 
   <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="assets/css/fontawesome.css">
-  <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
-  <link rel="stylesheet" href="assets/css/owl.css">
-  <link rel="stylesheet" href="assets/css/lightbox.css">
+  <link rel="stylesheet" href="{%static 'css/fontawesome.css'%}">
+  <link rel="stylesheet" href="{%static 'css/templatemo-edu-meeting.css'%}">
+  <link rel="stylesheet" href="{%static 'css/owl.css'%}">
+  <link rel="stylesheet" href="{%static 'css/lightbox.css'%}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
   <link href="/style.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
-  <link href="assets/css/loginStyle.css" rel="stylesheet" type="text/css">
-  <!--
+  <link href="{%static 'css/loginStyle.css'%}" rel="stylesheet" type="text/css">
+  
 
-TemplateMo 569 Edu Meeting
-
-https://templatemo.com/tm-569-edu-meeting
-
--->
-  <script type="text/javascript">
-    async function getEvent() {
-      var didd = sessionStorage.getItem("depa");
-      var unm = sessionStorage.getItem("name");
-      var eventnm = document.getElementById("event");
-      var evtprt = document.getElementById("evtprt")
-
-      var evet = {}
-      evet = await $.get("/event", { "did": didd, "user": unm }, function (data, status, xhr) {
-        return data;
-      }, "json");
-      // alert(JSON.stringify(evet));
-      var evt = []
-      evt = evet.output;
-      for (var key in evt) {
-        var prt= " </P><input type=\"submit\" value=\"APPLY\"> </div> </div>";
-        evtprt.innerHTML += "<div class=\"item\"> <div class=\"icon\"><img src=\"assets/images/service-icon-01.png\" alt=\"\"></div><div class=\"down-content\"><h4 >" + evt[key]["eventname"] + "</h4>  <p >" + evt[key]["eventdate"] +"</p><P >"+ evt[key]["eventvenue"] +"</P><P >" + evt[key]["eventtime"] + prt;
-        // for (var key1 in evt[key]) {
-        //   var txt = document.createElement("input");
-        //   txt.type = "text";
-        //   txt.id = key1;
-        //   txt.value = evt[key][key1];
-        //   eventnm.appendChild(txt);
-
-        // }
-        // var br = document.createElement("BR");
-        // eventnm.appendChild(br);
-
-        // var btn = document.createElement("button");
-
-        // btn.classList.add("fa", "fa-pen", "fa-6");
-
-        // // btn.innerHTML = "EDIT";
-        // eventnm.appendChild(btn);
-        // var btn = document.createElement("button");
-        // btn.classList.add("fa", "fa-circle-xmark", "fa-6");
-        // // btn.innerHTML = "DELETE";
-        // eventnm.appendChild(btn);
-        // var btn = document.createElement("button");
-
-        // btn.classList.add("fa", "fa-handshake", "fa-6");
-
-        // // btn.classList.add("fa", "fa-handshake", "fa-6");
-        // eventnm.appendChild(btn)
-        // var br = document.createElement("BR");
-        // eventnm.appendChild(br);
-
-        //  var name;
-        //   var btn = document.createElement("button");
-        //   btn.innerHTML = "participate";
-        //   if(name === 'ADMIN'){
-        //   btn.disabled = true;
-        //   }
-        //   else{
-        //     btn.disabled = false;
-        //   }
-        //   eventnm.appendChild(btn);
-
-      }
-    }
-  </script>
+ 
 </head>
 
-<body onload="getEvent()">
+<body >
   <!-- Sub Header!-->
 
   <!-- ***** Header Area Start ***** -->
@@ -108,7 +45,7 @@ https://templatemo.com/tm-569-edu-meeting
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li><a href="index.html" onclick="logoutAction()">LOGOUT</a></li>
+              <li><a >LOGOUT</a></li>
             </ul>
 
             <!-- ***** Menu End ***** -->
@@ -126,10 +63,10 @@ https://templatemo.com/tm-569-edu-meeting
       <ul class="nav">
         <div class="sidenav">
           <ul>
-            <li><a href="home.html"><i class="fa-solid fa-house-user"></i> Home</a></li>
-            <li><a href="profile.html" class="active"><i class="fa-solid fa-user"></i> PROFILE</a></li>
-            <li><a href="event.html"><i class="fa-solid fa-calendar"></i>EVENTS</a></li>
-            <li><a href="job.html"><i class="fa-solid fa-user-tie"></i>JOBS</a></li>
+            <li><a href="{%url 'home'%}"><i class="fa-solid fa-house-user"></i> Home</a></li>
+            <li><a href="{%url 'profile'%}" class="active"><i class="fa-solid fa-user"></i> PROFILE</a></li>
+            <li><a href="{%url 'event'%}"><i class="fa-solid fa-calendar"></i>EVENTS</a></li>
+            <li><a href="{%url 'job'%}"><i class="fa-solid fa-user-tie"></i>JOBS</a></li>
           </ul>
         </div>
       </ul>
@@ -167,17 +104,18 @@ https://templatemo.com/tm-569-edu-meeting
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{%static 'jquery/jquery.min.js'%}"></script>
+  <script src="{%static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/lightbox.js"></script>
-  <script src="assets/js/tabs.js"></script>
-  <script src="assets/js/isotope.js"></script>
-  <script src="assets/js/video.js"></script>
-  <script src="assets/js/slick-slider.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="{%static 'js/isotope.min.js'%}"></script>
+  <script src="{%static 'js/owl-carousel.js'%}"></script>
+  <script src="{%static 'js/lightbox.js'%}"></script>
+  <script src="{%static 'js/tabs.js'%}"></script>
+  
+  <script src="{%static 'js/video.js'%}"></script>
+  <script src="{%static 'js/slick-slider.js'%}"></script>
+  <script type="text/javascript" src="{%static 'js/custom.js'%}"></script>
+  <script src="{%static 'js/main.js'%}"></script>
 
 
 

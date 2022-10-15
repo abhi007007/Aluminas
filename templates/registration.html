@@ -33,37 +33,26 @@ https://templatemo.com/tm-569-edu-meeting
 -->
   <script type="text/javascript">
     async function registerAction(val) {
-      var name = document.getElementById("name").value;
-      var pass = document.getElementById("password").value;
-      var emal = document.getElementById("email").value;
-      var phone = document.getElementById("phone").value;
-      var dob = document.getElementById("dob").value;
-      var radios = document.getElementsByName("gender");
-      var gend;
+      var name = document.getElementById("name").value
+      var pass = document.getElementById("pass").value
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value
+      var dob = document.getElementById("dob").value
+      var radios = document.getElementsByName("gender")
+      var course =document.getElementById("course").value
+      var gend =0 ;
       for (var radio of radios) {
         if (radio.checked) {
-          gend = radio.value;
-          alert(gend);
+          gend = 1
         }
       };
-      // var user = document.getElementById("usertype").value;
-      var didd = document.getElementById("did").value;
-      // alert(name + "::" + pas + "::" + emal + "::" + phone + "::" + dob + "::" + gend + "::" + retypepass + "::" + age);
-      var reg = {}
-      //reg = await sendAjaxPost("/user", { "name": name, "pass": pas, "email": emal, "phone": phone, "dob": dob, "gender": gender, "repass": retypepass, "age": age }, "json");
-      reg = await $.post("/user", { "name": name, "password": pass, "email": emal, "phone": phone, "dob": dob, "gender": gend, "dname": didd, "pid": 5 }, function (data, status, xhr) {
 
-        // alert(reg);
-        return data;
-      }, "json");
-      alert(JSON.stringify(reg));
-      if (reg.status === "success") {
-        alert("success");
-        
-      }
-      else {
-        alert("fail");
-       
+      if(name==''||pass==""||email==""||phone==""||dob==""||gend==0||course==""){
+        window.alert("enter all data")
+        return false
+      }else{
+        return true
+
       }
     }
 
@@ -112,7 +101,8 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="col-lg-12">
               <div class="login">
                 <h1>REGISTER</h1>
-                <form onsubmit="registerAction(this)" method="post">
+                <form onsubmit="return registerAction(this)" method="post" target="_self">
+                  {% csrf_token %}
                   <label for="name">
                     <!-- font awesome icon -->
                     <i class="fas fa-user"></i>
@@ -146,8 +136,8 @@ https://templatemo.com/tm-569-edu-meeting
                   <label for="course">
                     <i class="fa-brands fa-discourse"></i>
                   </label>
-                  <select id="did">
-                    <option value="COURSE">COURSE</option>
+                  <select id="course" name="course">
+                    <option value="COURSE" selected>COURSE</option>
                     <option value="BTECH">BTECH</option>
                     <option value="MBA">MBA</option>
                     <option value="MCA">MCA</option>
@@ -159,7 +149,7 @@ https://templatemo.com/tm-569-edu-meeting
                   <label for="password">
                     <i class="fas fa-lock"></i>
                   </label>
-                  <input type="password" name="pass" placeholder="password" id="password" required>
+                  <input type="password" name="pass" placeholder="password" id="pass" required>
                   <label for="retype password">
                     <i class="fas fa-lock"></i>
                   </label>

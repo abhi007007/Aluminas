@@ -6,5 +6,12 @@ urlpatterns =[
     path('index',views.index,name='index'),
     path('login',views.login,name='login'),
     path('register',views.register,name='register'),
+    path('home',views.home,name='home'),
+    path('job',views.job,name='job'),
+    path('createjob',views.createjob,name="createjob"),
+    path('profile',views.profile,name='profile'),
+    path('event',views.event,name='event'),
+    
+    
 
 ]

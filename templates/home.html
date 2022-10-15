@@ -13,7 +13,7 @@
   <title>HOME-USER</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{%static 'bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
 
 
   <!-- Additional CSS Files -->
@@ -30,27 +30,9 @@ TemplateMo 569 Edu Meeting
 https://templatemo.com/tm-569-edu-meeting
 
 -->
-  <script type="text/javascript">
-    async function loadSession() {
-      if (sessionStorage.getItem("email") === null) {
-        window.location.replace("/login.html");
-      }
-      var wel = document.getElementById("name");
-      wel.innerText = "welcome " + sessionStorage.getItem("name")
-    }
-
-    async function logoutAction() {
-      sessionStorage.removeItem("utid");
-      sessionStorage.removeItem("name");
-      sessionStorage.removeItem("email");
-      sessionStorage.removeItem("utp");
-      sessionStorage.removeItem("depa");
-      alert("User logged out successfully");
-    }
-  </script>
 </head>
 
-<body onload="loadSession()">
+<body >
   <!-- Sub Header!-->
 
   <!-- ***** Header Area Start ***** -->
@@ -64,7 +46,7 @@ https://templatemo.com/tm-569-edu-meeting
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li><a href="index.html" onclick="logoutAction()">LOGOUT</a></li>
+              <li><a href="index.html" >LOGOUT</a></li>
             </ul>
             <!-- <a class='menu-trigger'>
                           <span>Menu</span>
@@ -83,9 +65,9 @@ https://templatemo.com/tm-569-edu-meeting
 
       <div class="sidenav">
         <ul>
-          <li><a href="home.html"><i class="fa-solid fa-house-user"></i>Home</a></li>
-          <li><a href="profile.html" class="active"><i class="fa-solid fa-user"></i>PROFILE</a></li>
-          <li><a href="event.html"><i class="fa-solid fa-calendar"></i>EVENTS</a></li>
+          <li><a href="{%url 'home'%}"><i class="fa-solid fa-house-user"></i>Home</a></li>
+          <li><a class="active"href="{%url 'profile'%}"><i class="fa-solid fa-user"></i>PROFILE</a></li>
+          <li><a href="{%url 'event'%}"><i class="fa-solid fa-calendar"></i>EVENTS</a></li>
           <li><a href="{%url 'job'%}"><i class="fa-solid fa-user-tie"></i>JOBS</a></li>
           
         </ul>
@@ -96,12 +78,12 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="col-lg-12">
               <div class="filters">
                 <li id="name">welcome user</li>
-                <!-- <ul>
+                 <ul>
                   <li data-filter="*"  class="active">All events</li>
                   <li data-filter=".soon">Soon</li>
                   <li data-filter=".imp">Important</li>
                   <li data-filter=".att">Attractive</li>
-                </ul>  -->
+                </ul> 
               </div>
               <br><br><br><br><br><br><br>
             </div>
